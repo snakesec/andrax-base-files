@@ -1,0 +1,9 @@
+PRETTY_NAME="ANDRAX-NG 1001 (TOPSECRET)"
+NAME="ANDRAX-NG"
+VERSION_ID="1001"
+VERSION="1001 (TOPSECRET)"
+VERSION_CODENAME=TOPSECRET
+ID=andrax
+HOME_URL="https://snakesecurity.org/andrax"
+SUPPORT_URL="https://snakesecurity.org/contact"
+BUG_REPORT_URL="https://snakesecurity.org/contact"

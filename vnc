@@ -1,0 +1,34 @@
+#! /bin/bash
+
+### BEGIN INIT INFO
+# Provides:          VNC
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: VNC Server
+# Description:       Run VNC Server Start and Stop
+### END INIT INFO
+
+case "$1" in
+  start)
+    sudo -u andrax bash -c 'vncserver -kill :0 > /dev/null 2>&1'
+    rm -Rf /home/andrax/.vnc/*.pid
+    rm -Rf /tmp/.X*
+    echo "Starting VNC Server..."
+    sudo -u andrax bash -c 'vncserver -geometry 1360x768 :0'
+    ;;
+  stop)
+    echo "Stopping VNC Server..."
+    sudo -u andrax bash -c 'vncserver -kill :0 > /dev/null 2>&1'
+    rm -Rf /home/andrax/.vnc/*.pid
+    rm -Rf /tmp/.X*
+    sleep 2
+    ;;
+  *)
+    echo "Usage: sudo service vnc {start | stop}"
+    exit 1
+    ;;
+esac
+
+exit 0

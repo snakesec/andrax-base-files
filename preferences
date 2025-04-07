@@ -1,0 +1,3 @@
+Package: systemd systemd-container systemd-cron systemd-sysv systemd-timesyncd systemd-bootchart systemd-coredump systemd-journal-remote systemd-tests golang nmap nmap-common ncat ike-scan bettercap bettercap-caplets wafw00f wfuzz sqlmap hydra hydra-gtk radare2 thc-ipv6 ffuf patator redsocks aespipe afl++ arjun arping binwalk bittwist braa btscanner cewl chafa cht.sh cowpatty crunch capstone-tool dhcpig dhcping dizzy dns2tcp dnsmap dnsrecon dnstwist doona gobuster hashcat hcxdumptool hcxtools ike-scan ipcalc john maskprocessor masscan micro nbtscan ncrack netdiscover onesixtyone pixiewps pocsuite3 reaver sipsak sipvicious sippts slowhttptest smbmap whatweb sherlock medusa changeme mfoc swaks termineter 
+Pin: origin *
+Pin-Priority: -1

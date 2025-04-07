@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ "$EUID" -ne 0 ]]; then
+    exit 1
+fi
+
+if grep -q 'androidboot' /proc/cmdline; then
+    if [[ "$1" == "--keys-only" ]]; then
+        cat /opt/ANDRAX/dumpkeys/keymap-keys-only.map
+    elif [[ "$1" == "--long-info" ]]; then
+        cat /opt/ANDRAX/dumpkeys/keymap-long-info.map
+    else
+        cat /opt/ANDRAX/dumpkeys/keymap-full.map
+    fi
+else
+    /usr/bin/dumpkeys "$@"
+fi

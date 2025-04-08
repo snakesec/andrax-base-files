@@ -16,7 +16,7 @@ case "$1" in
     rm -Rf /home/andrax/.vnc/*.pid
     rm -Rf /tmp/.X*
     echo "Starting VNC Server..."
-    sudo -u andrax bash -c 'vncserver -geometry 1360x768 :0'
+    sudo -u andrax bash -c 'vncserver -geometry 2560x1440 :0'
     ;;
   stop)
     echo "Stopping VNC Server..."

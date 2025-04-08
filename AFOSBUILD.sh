@@ -74,62 +74,58 @@ else
   exit 1
 fi
 
-cp -Rf andrax-ng-default.png /usr/share/images/fluxbox/andrax-ng-default.png
-
-chmod 755 /usr/share/images/fluxbox/andrax-ng-default.png
-
-if [ $? -eq 0 ]
-then
-  # Result is OK! Just continue...
-  echo "Setup default wallpaper... PASS!"
+if [ $(uname -m | grep 'x86_64') ]; then
+  #
+  echo "Bypass Graphical Environment Setup..."
 else
-  # houston we have a problem
-  exit 1
+  cp -Rf andrax-ng-default.png /usr/share/images/fluxbox/andrax-ng-default.png
+  chmod 755 /usr/share/images/fluxbox/andrax-ng-default.png
+
+  if [ $? -eq 0 ]
+  then
+    # Result is OK! Just continue...
+    echo "Setup default wallpaper... PASS!"
+  else
+    # houston we have a problem
+    exit 1
+  fi
+
+  cp -Rf andrax-ng-style /usr/share/fluxbox/styles/andrax-ng
+  chmod 755 /usr/share/fluxbox/styles/andrax-ng
+
+  if [ $? -eq 0 ]
+  then
+    # Result is OK! Just continue...
+    echo "Setup default STYLE... PASS!"
+  else
+    # houston we have a problem
+    exit 1
+  fi
+
+  cp -Rf .fluxbox /home/andrax/
+  chown -R andrax:andrax /home/andrax/.fluxbox
+  chmod -R 755 /home/andrax/.fluxbox
+
+  if [ $? -eq 0 ]
+  then
+    # Result is OK! Just continue...
+    echo "Setup FLUXBOX... PASS!"
+  else
+    # houston we have a problem
+    exit 1
+  fi
+
+  cp -Rf vnc /etc/init.d/vnc
+
+  chown root:root /etc/init.d/vnc
+  chmod 755 /etc/init.d/vnc
+
+  if [ $? -eq 0 ]
+  then
+    # Result is OK! Just continue...
+    echo "Setup VNC... PASS!"
+  else
+    # houston we have a problem
+    exit 1
+  fi
 fi
-
-cp -Rf andrax-ng-style /usr/share/fluxbox/styles/andrax-ng
-
-chmod 755 /usr/share/fluxbox/styles/andrax-ng
-
-if [ $? -eq 0 ]
-then
-  # Result is OK! Just continue...
-  echo "Setup default STYLE... PASS!"
-else
-  # houston we have a problem
-  exit 1
-fi
-
-cp -Rf .fluxbox /home/andrax/
-
-chown -R andrax:andrax /home/andrax/.fluxbox
-
-chmod -R 755 /home/andrax/.fluxbox
-
-if [ $? -eq 0 ]
-then
-  # Result is OK! Just continue...
-  echo "Setup FLUXBOX... PASS!"
-else
-  # houston we have a problem
-  exit 1
-fi
-
-cp -Rf vnc /etc/init.d/vnc
-
-chown root:root /etc/init.d/vnc
-
-chmod 755 /etc/init.d/vnc
-
-if [ $? -eq 0 ]
-then
-  # Result is OK! Just continue...
-  echo "Setup VNC... PASS!"
-else
-  # houston we have a problem
-  exit 1
-fi
-
-
-chown -R andrax:andrax /opt/ANDRAX/
-chmod -R 755 /opt/ANDRAX/

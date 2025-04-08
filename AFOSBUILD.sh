@@ -1,4 +1,5 @@
 dpkg-divert --local --rename --add /etc/os-release
+dpkg-divert --local --rename --add /etc/update-motd.d/10-uname
 
 cp -Rf os-release /etc/os-release
 

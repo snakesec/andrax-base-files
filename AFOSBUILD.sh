@@ -1,3 +1,5 @@
+dpkg-divert --local --rename --add /etc/os-release
+
 cp -Rf os-release /etc/os-release
 
 if [ $? -eq 0 ]

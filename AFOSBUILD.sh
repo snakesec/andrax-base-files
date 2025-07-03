@@ -172,9 +172,12 @@ fi
 #                                         #
 ###########################################
 
-sudo service vnc stop
-
-sudo apt update
-
-sudo apt remove --purge tightvncserver tightvncpasswd -y
-sudo apt install tigervnc-standalone-server -y
+if [ $(uname -m | grep 'x86_64') ]; then
+  #
+  echo "Bypass HOTFIX VNC..."
+else
+  sudo service vnc stop
+  sudo apt update
+  sudo apt remove --purge tightvncserver tightvncpasswd -y
+  sudo apt install tigervnc-standalone-server -y
+fi

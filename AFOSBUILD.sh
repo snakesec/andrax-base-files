@@ -1,7 +1,28 @@
 dpkg-divert --local --rename --add /etc/os-release
 dpkg-divert --local --rename --add /etc/update-motd.d/10-uname
 
-cp -Rf os-release /etc/os-release
+chmod 777 /etc/os-release
+
+NEW_VERSION=$(grep -o '[0-9]\+' /version | head -n 1)
+
+CODENAME="EARTHQUAKE"
+
+if [[ -z "$NEW_VERSION" ]]; then
+	NEW_VERSION=1002
+        echo -n "1002" > /version
+fi
+
+cat > /etc/os-release <<EOF
+PRETTY_NAME="ANDRAX-NG $NEW_VERSION ($CODENAME)"
+NAME="ANDRAX-NG"
+VERSION_ID="$NEW_VERSION"
+VERSION="$NEW_VERSION (CODENAME)"
+VERSION_CODENAME=TOPSECRET
+ID=andrax
+HOME_URL="https://snakesecurity.org/andrax"
+SUPPORT_URL="https://snakesecurity.org/contact"
+BUG_REPORT_URL="https://snakesecurity.org/contact"
+EOF
 
 if [ $? -eq 0 ]
 then
@@ -14,7 +35,19 @@ fi
 
 chmod 644 /etc/os-release
 
-cp -Rf os-release /usr/lib/os-release
+chmod 777 /usr/lib/os-release
+
+cat > /etc/os-release <<EOF
+PRETTY_NAME="ANDRAX-NG $NEW_VERSION ($CODENAME)"
+NAME="ANDRAX-NG"
+VERSION_ID="$NEW_VERSION"
+VERSION="$NEW_VERSION ($CODENAME)"
+VERSION_CODENAME=$CODENAME
+ID=andrax
+HOME_URL="https://snakesecurity.org/andrax"
+SUPPORT_URL="https://snakesecurity.org/contact"
+BUG_REPORT_URL="https://snakesecurity.org/contact"
+EOF
 
 if [ $? -eq 0 ]
 then
@@ -132,3 +165,16 @@ else
     exit 1
   fi
 fi
+
+###########################################
+#                                         #
+# Any command below that is a hot-fix...  #
+#                                         #
+###########################################
+
+sudo service vnc stop
+
+sudo apt update
+
+sudo apt remove --purge tightvncserver tightvncpasswd -y
+sudo apt install tigervnc-standalone-server -y

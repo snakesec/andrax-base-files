@@ -181,3 +181,16 @@ else
   sudo apt remove --purge tightvncserver tightvncpasswd -y
   sudo apt install tigervnc-standalone-server -y
 fi
+
+rm -rf /opt/ANDRAX/python3.13
+
+python3.13 -m venv /opt/ANDRAX/python3.13
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Create ANDRAX-NG Python3.13 PATH... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi

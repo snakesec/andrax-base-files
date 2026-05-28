@@ -2,4 +2,4 @@
 
 Some ANDRAX-NG base files
 
-These files should only be used by AFOS to configure ANDRAX-NG
+These files should only be used by AFOS-NG to setup and configure ANDRAX-NG

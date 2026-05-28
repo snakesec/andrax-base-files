@@ -4,20 +4,26 @@ dpkg-divert --local --rename --add /etc/update-motd.d/10-uname
 chmod 777 /etc/os-release
 
 NEW_VERSION=$(grep -o '[0-9]\+' /version | head -n 1)
+CODENAME=$(grep -o -m 1 '[A-Z]\+' /codename | tr -d '\n')
 
-CODENAME="EARTHQUAKE"
-
+# Fallback in case /version invalid
 if [[ -z "$NEW_VERSION" ]]; then
-	NEW_VERSION=1002
-        echo -n "1002" > /version
+	NEW_VERSION=2001
+  echo -n "2001" > /version
+fi
+
+# Fallback in case /codename is invalid
+if [[ -z "$CODENAME" ]]; then
+	CODENAME="AFTERSHOCK"
+  echo -n "AFTERSHOCK" > /codename
 fi
 
 cat > /etc/os-release <<EOF
 PRETTY_NAME="ANDRAX-NG $NEW_VERSION ($CODENAME)"
 NAME="ANDRAX-NG"
 VERSION_ID="$NEW_VERSION"
-VERSION="$NEW_VERSION (CODENAME)"
-VERSION_CODENAME=TOPSECRET
+VERSION="$NEW_VERSION ($CODENAME)"
+VERSION_CODENAME=$CODENAME
 ID=andrax
 HOME_URL="https://snakesecurity.org/andrax"
 SUPPORT_URL="https://snakesecurity.org/contact"
@@ -37,7 +43,7 @@ chmod 644 /etc/os-release
 
 chmod 777 /usr/lib/os-release
 
-cat > /etc/os-release <<EOF
+cat > /usr/lib/os-release <<EOF
 PRETTY_NAME="ANDRAX-NG $NEW_VERSION ($CODENAME)"
 NAME="ANDRAX-NG"
 VERSION_ID="$NEW_VERSION"
@@ -166,6 +172,46 @@ else
   fi
 fi
 
+cp -Rf sudoers /etc/sudoers
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Copy sudoers file... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi
+
+chown root:root /etc/sudoers
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Set sudoers file owner... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi
+
+chmod 440 /etc/sudoers
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Set sudoers file permissions... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi
+
+
+
+
+
+
+
+
 ###########################################
 #                                         #
 # Any command below that is a hot-fix...  #
@@ -173,24 +219,11 @@ fi
 ###########################################
 
 if [ $(uname -m | grep 'x86_64') ]; then
-  #
   echo "Bypass HOTFIX VNC..."
 else
   sudo service vnc stop
   sudo apt update
   sudo apt remove --purge tightvncserver tightvncpasswd -y
-  sudo apt install tigervnc-standalone-server -y
+  sudo apt install tigervnc-standalone-server -y --no-install-recommends
 fi
 
-rm -rf /opt/ANDRAX/python3.13
-
-python3.13 -m venv /opt/ANDRAX/python3.13
-
-if [ $? -eq 0 ]
-then
-  # Result is OK! Just continue...
-  echo "Create ANDRAX-NG Python3.13 PATH... PASS!"
-else
-  # houston we have a problem
-  exit 1
-fi

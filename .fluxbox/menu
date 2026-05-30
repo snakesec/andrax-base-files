@@ -1,4 +1,4 @@
-# ANDRAX-NG FluxBox menu! Don't edit, your little shit!
+# ANDRAX-NG FluxBox menu! Don't edit!
 
 [begin] (ANDRAX-NG)
 
@@ -6,7 +6,7 @@
 
    [submenu] (Applications) {}
       
-      [submenu] (Network) {}
+      [submenu] (Internet) {}
          [submenu] (Web Browsing) {}
             [exec] (Firefox) { firefox } <>
             [exec] (Chromium) { chromium } <>
@@ -14,7 +14,7 @@
       [end]
       
       [submenu] (Terminal) {}
-         [exec] (ANDRAX-NG) { x-terminal-emulator -T "ANDRAX Hacker's Shell" -e /bin/zsh} <>
+         [exec] (ANDRAX-NG) { x-terminal-emulator -T "ANDRAX-NG Hacker's Shell" -e /bin/zsh} <>
       [end]
 
    [end]

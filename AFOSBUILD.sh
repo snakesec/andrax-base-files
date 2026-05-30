@@ -205,6 +205,28 @@ else
   exit 1
 fi
 
+clang -o andrax-fetch andrax-fetch.c -s
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Compile ANDRAX-FETCH... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi
+
+cp -Rf andrax-fetch /opt/ANDRAX/bin/andrax
+
+if [ $? -eq 0 ]
+then
+  # Result is OK! Just continue...
+  echo "Install ANDRAX-FETCH... PASS!"
+else
+  # houston we have a problem
+  exit 1
+fi
+
 
 
 

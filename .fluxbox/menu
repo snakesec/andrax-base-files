@@ -19,6 +19,64 @@
 
    [end]
 
+   [submenu] (CyberSecurity Tools) {}
+
+      [submenu] (Information Gathering) {}
+      [end]
+
+      [submenu] (Scanning) {}
+      [end]
+
+      [submenu] (Network Hacking) {}
+      [end]
+
+      [submenu] (Bug Bounty) {}
+      [end]
+
+      [submenu] (Web Hacking) {}
+      [end]
+
+      [submenu] (Phishing) {}
+      [end]
+
+      [submenu] (Exploitation) {}
+      [end]
+
+      [submenu] (C2 Ops) {}
+      [end]
+
+      [submenu] (Android Hacking) {}
+      [end]
+
+      [submenu] (Apple Hacking) {}
+      [end]
+
+      [submenu] (Hardware Hacking) {}
+      [end]
+
+      [submenu] (Forensics) {}
+      [end]
+
+      [submenu] (Password Hacking) {}
+      [end]
+
+      [submenu] (Phreaking) {}
+      [end]
+
+      [submenu] (ICS/SCADA) {}
+      [end]
+
+      [submenu] (Mainframe Hacking) {}
+      [end]
+
+      [submenu] (Stress Testing) {}
+      [end]
+
+      [submenu] (Wireless Hacking) {}
+      [end]
+
+   [end]
+
    [config] (Configuration)
    [workspaces] (Workspaces)
    [restart] (Restart)

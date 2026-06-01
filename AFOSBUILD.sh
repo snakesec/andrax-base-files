@@ -138,7 +138,7 @@ else
   if [ $? -eq 0 ]
   then
     # Result is OK! Just continue...
-    echo "Setup default STYLE... PASS!"
+    echo "Setup default FLUXBOX STYLE... PASS!"
   else
     # houston we have a problem
     exit 1

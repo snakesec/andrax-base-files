@@ -170,6 +170,20 @@ else
     # houston we have a problem
     exit 1
   fi
+
+  mkdir -p /opt/ANDRAX/terminator
+
+  cp -Rf terminator-config /opt/ANDRAX/terminator/.config
+
+  if [ $? -eq 0 ]
+  then
+    # Result is OK! Just continue...
+    echo "Copy terminator config... PASS!"
+  else
+    # houston we have a problem
+    exit 1
+  fi
+
 fi
 
 cp -Rf sudoers /etc/sudoers
